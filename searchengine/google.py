@@ -289,4 +289,4 @@ if __name__ == "__main__":
 
     # Run the query.
     for url in search(query, **params):
-        print(url)
+        pass #print(url)

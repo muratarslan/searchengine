@@ -3,5 +3,5 @@ from django.contrib import admin
 from django.conf.urls import *
 
 urlpatterns = patterns('',
-(r'^/?$', 'google.searchengine.views.search'),
+(r'^/?$', 'searchengine.views.search'),
 )

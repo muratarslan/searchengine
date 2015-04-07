@@ -39,4 +39,4 @@ pip-log.txt
 .*.swp*
 .*.swo*
 *.*~
-
+.venv/
