@@ -1,0 +1,97 @@
+Now we create a folder using virtualenv so that the folder can act as the virtual environment to contain Django. Type the following command in the terminal:
+
+	- virtualenv --no-site-packages django-user
+
+Here django-user is the folder that will be created and used as the environment. It will be created under the directory you are currently in. Now to start the environment use the command:
+
+	- source django-user/bin/activate
+
+Navigate to the folder django-user using the command.
+
+	- cd django-user
+
+The final step is installing Django within this environment that we have created in the previous step. Remember that you still have to be in the virtual environment in the django-user folder else django will be installed outside the environmant and cannot be used. To install Django use the command:
+
+	- easy_install django
+
+
+NEW PROJECT
+
+Create a new project called “google” 
+		
+	- django-admin.py startproject google
+
+Create a new application called "searchengine": 
+	
+	- cd google
+
+	- cd google
+
+	- python manage.py startapp searchengine
+
+
+Create a "templates" folder
+
+	- mkdir templates
+
+
+Edit settings.py and set TEMPATES_DIR to: 
+
+	- TEMPLATE_DIRS = ['templates/']
+
+
+Create in templates file called "search.html" with the code: 
+
+	<form action="/" method="post">
+	<input type="text" name="term" size="30"> <input type="submit" value="Search">
+	</form>
+
+
+Edit searchengine/views.py to get: 
+
+from django.shortcuts import render_to_response, render
+from django.http import Http404, HttpResponse, HttpResponseRedirect
+# from project.application.web_search....
+from google.searchengine.web_search import google
+from django.views.decorators.csrf import csrf_exempt
+
+# For verification error
+@csrf_exempt
+
+def search(request):
+
+    if request.POST:
+	return render_to_response('search.html', {'result': google(request.POST['term'], 10)})
+	#return HttpResponseRedirect("/")
+    else:
+	print "Sicar Abi"	
+	return render_to_response('search.html')
+
+
+Hook the view to the main URL by editing urls.py and entering the code: 
+
+from django.conf.urls import *
+
+urlpatterns = patterns('',
+(r'^/?$', 'google.searchengine.views.search'),
+)
+
+
+Change "search.html"
+
+<form action="/" method="post">
+<input type="text" name="term" size="30"> <input type="submit" value="Search">
+</form><hr>
+{% if result %}
+	{% for res in result %}
+	<a href="{{ res.1 }}"><b>{{ res.0 }}</b></a><br>
+	{{ res.2 }}<br><br>
+        {% endfor %}
+{% endif %}
+
+
+Start the development server: 
+
+	- python manage.py runserver 8080
+	
+

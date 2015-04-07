@@ -1,0 +1,4 @@
+ from google import search
+
+for url in search('Mariposa botnet', tld='es', lang='es', stop=20):
+	print(url)
