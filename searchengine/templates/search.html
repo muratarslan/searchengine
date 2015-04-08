@@ -7,8 +7,9 @@
 	{% endfor %}
 {% endif %}
 
-{% if rdf %}
-	{% for r in rdf %}
-		{{r}}<br>
-	{% endfor %}
+{% if rdf_dict %}
+	<br>
+	Link: <a href="{{rdf_dict.link}}" target="_blank">{{term}}</a><br><br>
+	Birth Date: {{ rdf_dict.birth_date }}<br>
 {% endif %}
+

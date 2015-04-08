@@ -11,10 +11,8 @@ def showRdf(term):
 	stmts = []
 	g = Graph()
 	g.parse("http://dbpedia.org/resource/" + term)
-	for stmt in g.subject_objects(URIRef("http://dbpedia.org/ontology/birthDate")):
-		stmts.append(stmt)
-		print stmts
-	return stmts
-
+	r = g.subject_objects(URIRef("http://dbpedia.org/ontology/birthDate"))
+	
+	return r
 
 
