@@ -3,6 +3,12 @@
 </form><hr>
 {% if result %}
 	{% for res in result %}
-	<li>{{ res }}</li>
+	<li><a href="{{res}}">{{res}}</a></li>
+	{% endfor %}
+{% endif %}
+
+{% if rdf %}
+	{% for r in rdf %}
+		{{r}}<br>
 	{% endfor %}
 {% endif %}

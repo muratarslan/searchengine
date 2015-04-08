@@ -15,6 +15,7 @@ import os
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+TEMPLATE_DIRS = ['~/home/murat/django-user/google/searchengine/templates/']
 
 
 # Quick-start development settings - unsuitable for production

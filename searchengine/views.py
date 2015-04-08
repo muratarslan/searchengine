@@ -7,9 +7,11 @@ from django.views.decorators.csrf import csrf_exempt
 @csrf_exempt
 
 def search(request):
-    if request.method == 'POST':
-        result = goog(request.POST['term'], 3)
-        print "RESULT: %s" % result
-        return render(request,'search.html', {'result': result})
+	if request.method == 'POST':
+		result = goog(request.POST['term'], 3)
+		rdf = showRdf(request.POST['term'])[0]
+		#print "RESULT: %s" % result
+		return render(request,'search.html', {'result': result,'rdf': rdf})
+	return render(request,'search.html')
 
-    return render(request,'search.html')
+
