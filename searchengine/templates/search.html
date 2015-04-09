@@ -26,6 +26,13 @@
 				<input type="text" name="term" size="30"> <input type="submit" value="Search">
 				</form>
 			</main>
+			<div style="margin-top:30px">
+				{% if result %}
+					{% for res in result %}
+						<li><a href="{{res}}">{{res}}</a></li>
+					{% endfor %}
+				{% endif %}
+			</div>
 		</div>
 
 		<aside class="left-sidebar">
@@ -33,21 +40,27 @@
 		</aside>
 
 		<aside class="right-sidebar">
-			{% if rdf_dict %}
+			<br>
+			<br>
+			{% if birth_dict %}
 				<br>
-				Link: <a href="{{rdf_dict.link}}" target="_blank">{{term}}</a><br><br>
-				Birth Date: {{ rdf_dict.birth_date }}<br>
+				<a href="{{birth_dict.link}}" target="_blank">{{term}}</a><br>
+
+				{% if desc_dict %}
+				Description: {{ desc_dict.desc }}<br>
+				{% endif %}
+
+				Birth Date: {{ birth_dict.birth_date }}<br>
+			{% endif %}
+
+			{% if death_dict %}
+				Death Date: {{ death_dict.death_date }}<br>
 			{% endif %}
 		</aside>
 
 	</div>
 
 	<footer class="footer">
-		{% if result %}
-			{% for res in result %}
-			<li><a href="{{res}}">{{res}}</a></li>
-			{% endfor %}
-		{% endif %}
 	</footer>
 
 </div>

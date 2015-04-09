@@ -7,12 +7,24 @@ def goog(term,num):
         urls.append(url)
     return urls
 
-def showRdf(term):
-	stmts = []
+def birth(term):
 	g = Graph()
 	g.parse("http://dbpedia.org/resource/" + term)
-	r = g.subject_objects(URIRef("http://dbpedia.org/ontology/birthDate"))
-	
-	return r
+	birth = g.subject_objects(URIRef("http://dbpedia.org/ontology/birthDate"))
+	return birth
+
+def death(term):
+	g = Graph()
+	g.parse("http://dbpedia.org/resource/" + term)
+	death = g.subject_objects(URIRef("http://dbpedia.org/ontology/deathDate"))
+	return death
+
+def description(term):
+	g = Graph()
+	g.parse("http://dbpedia.org/resource/" + term)
+	desc = g.subject_objects(URIRef("http://dbpedia.org/property/description"))
+	return desc
+
+
 
 
