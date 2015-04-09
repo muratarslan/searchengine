@@ -1,0 +1,17 @@
+<form action="/" method="post">
+<input type="text" name="term" size="30"> <input type="submit" value="Search">
+</form><hr>
+{% if result %}
+	{% for res in result %}
+	<li><a href="{{res}}">{{res}}</a></li>
+	{% endfor %}
+{% endif %}
+
+{% if rdf_dict %}
+	<br>
+	Link: <a href="{{rdf_dict.link}}" target="_blank">{{term}}</a><br><br>
+	Birth Date: {{ rdf_dict.birth_date }}<br>
+{% endif %}
+
+
+
