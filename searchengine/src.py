@@ -3,7 +3,7 @@ from rdflib import Graph, URIRef
 
 def goog(term,num):
     urls = []
-    for url in search(term, tld='es', lang='es', stop=num):
+    for url in search(term, tld='es', lang='en', stop=num):
         urls.append(url)
     return urls
 
@@ -25,13 +25,19 @@ def description(term):
 	desc = g.subject_objects(URIRef("http://dbpedia.org/property/description"))
 	return desc
 
-
 def thumbnail(term):
+	th = []
 	g = Graph()
 	g.parse("http://dbpedia.org/resource/" + term)
 	for thumb in g.subject_objects(URIRef("http://dbpedia.org/ontology/thumbnail")):
 		th = thumb[1]
 	return th
+
+def children(term):
+	g = Graph()
+	g.parse("http://dbpedia.org/resource/" + term)
+	child = g.subject_objects(URIRef("http://dbpedia.org/ontology/child"))
+	return child
 
 
 

@@ -7,6 +7,27 @@
 	<meta name="description" content="" />
 	{% load staticfiles %}
 	<link href="{% static "style.css" %}" rel="stylesheet">
+	<style>
+	/* unvisited link */
+	a:link {
+	    color: #000000;
+	}
+
+	/* visited link */
+	a:visited {
+	    color: #000000;
+	}
+
+	/* mouse over link */
+	a:hover {
+	    color: #00FF00;
+	}
+
+	/* selected link */
+	a:active {
+	    color: #0000FF;
+	}
+	</style>
 </head>
 
 <body>
@@ -15,7 +36,7 @@
 
 	<header class="header">
 		{% load staticfiles %}
-		<img src="{% static "logo.png" %}" alt="My image"/>
+		<img src="{% static "logo.png" %}" alt="LOGO"/>
 	</header>
 
 	<div class="middle">
@@ -44,14 +65,14 @@
 			<br>
 			{% if birth_dict %}
 				<br>
-				<a href="{{birth_dict.link}}" target="_blank">{{term}}</a><br>
+				<center><a href="{{birth_dict.link}}" target="_blank">{{term}}</a></center><br>
 
 				{% if thumb_dict %}
-				<img src="{{ thumb_dict.thumb }}" align="middle" alt="thumbnail"  height="250" width="250"><br>
+					<img src="{{ thumb_dict.thumb }}" alt="thumbnail"  height="250" width="250"><br>
 				{% endif %}
 
 				{% if desc_dict %}
-				Description: {{ desc_dict.desc }}<br>
+					<bold>Description:</bold> {{ desc_dict.desc }}<br>
 				{% endif %}
 
 				Birth Date: {{ birth_dict.birth_date }}<br>
@@ -59,6 +80,10 @@
 
 			{% if death_dict %}
 				Death Date: {{ death_dict.death_date }}<br>
+			{% endif %}
+
+			{% if child_dict %}
+				<a href="{{ child_dict.child }}"> Children </a><br>
 			{% endif %}
 		</aside>
 
