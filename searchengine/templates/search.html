@@ -21,7 +21,7 @@
 	<div class="middle">
 
 		<div class="container">
-			<main class="content">
+			<main class="content"> 
 				<form action="/" method="post">
 				<input type="text" name="term" size="30"> <input type="submit" value="Search">
 				</form>
@@ -45,6 +45,10 @@
 			{% if birth_dict %}
 				<br>
 				<a href="{{birth_dict.link}}" target="_blank">{{term}}</a><br>
+
+				{% if thumb_dict %}
+				<img src="{{ thumb_dict.thumb }}" align="middle" alt="thumbnail"  height="250" width="250"><br>
+				{% endif %}
 
 				{% if desc_dict %}
 				Description: {{ desc_dict.desc }}<br>

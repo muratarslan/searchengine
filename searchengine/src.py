@@ -26,5 +26,12 @@ def description(term):
 	return desc
 
 
+def thumbnail(term):
+	g = Graph()
+	g.parse("http://dbpedia.org/resource/" + term)
+	for thumb in g.subject_objects(URIRef("http://dbpedia.org/ontology/thumbnail")):
+		th = thumb[1]
+	return th
+
 
 

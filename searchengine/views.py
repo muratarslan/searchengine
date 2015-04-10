@@ -14,10 +14,12 @@ def search(request):
 		rdf_birth   = list(birth(request.POST['term']))
 		rdf_death = list(death(request.POST['term']))
 		rdf_desc   = list(description(request.POST['term']))
+		rdf_thumb = thumbnail(request.POST['term'])
 
                 b = {}
 		d = {}
 		desc = {}
+		thumb = {}
 
 		# Birth Date
                 if len(rdf_birth) > 0:
@@ -29,10 +31,16 @@ def search(request):
                     d.update({'link': unicode(rdf_death[0][0]), 'death_date': unicode(rdf_death[0][1])})
                 print d
 
-		# Spouse
+		# Description
 		if len(rdf_desc) > 0:
                     desc.update({'desc': unicode(rdf_desc[0][1])})
                 print desc
+
+		# Thumb
+		if len(rdf_thumb) > 0:
+                    thumb.update({'thumb': unicode(rdf_thumb)})
+		print type(thumb)
+                print thumb
 	
 
 
@@ -40,6 +48,7 @@ def search(request):
 									      'birth_dict': b, 
 									      'death_dict':d,
 									      'desc_dict':desc,
+									      'thumb_dict':thumb,
 									      'term': request.POST['term']})
 	return render(request,'search.html')
 

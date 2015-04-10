@@ -4,7 +4,9 @@ from django.conf.urls import *
 import settings
 
 urlpatterns = patterns('',
-(r'^/?$', 'searchengine.views.search'),
+url(r'^/?$', 'searchengine.views.search'),
 )
+
+
 
 
