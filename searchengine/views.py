@@ -12,19 +12,17 @@ from django.views.decorators.csrf import csrf_exempt
 
 def search(request):
 	if request.method == 'POST':
-
+		
 		result = goog(modify(request.POST['term']), 3)
 		rdf_birth   = list(birth(modify(request.POST['term'])))
 		rdf_death = list(death(modify(request.POST['term'])))
 		rdf_desc   = list(description(modify(request.POST['term'])))
 		rdf_thumb = thumbnail(modify(request.POST['term']))
-		rdf_child   = list(children(modify(request.POST['term'])))
 
                 brth = {}
 		dth = {}
 		desc = {}
 		thumb = {}
-		child = {}
 
 		# Birth Date
                 if len(rdf_birth) > 0:
@@ -47,9 +45,9 @@ def search(request):
                 print thumb
 
 		# Child
-		if len(rdf_thumb) > 0:
-                    child.update({'child': unicode(rdf_child[0][1])})
-                print child
+		#if len(rdf_thumb) > 0:
+                #    child.update({'child': unicode(rdf_child[0][1])})
+                #print child
 	
 
 
@@ -58,7 +56,6 @@ def search(request):
 									      'death_dict':dth,
 									      'desc_dict':desc,
 									      'thumb_dict':thumb,
-									      'child_dict':child,
 									      'term': request.POST['term']})
 	return render(request,'search.html')
 
