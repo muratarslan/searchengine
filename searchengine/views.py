@@ -20,10 +20,15 @@ def search(request):
 		rdf_desc   = list(description(modify(request.POST['term'])))
 		rdf_thumb = thumbnail(modify(request.POST['term']))
 		rdf_bname = birthName(modify(request.POST['term']))
+
 		# For places
 		rdf_location = location(modify(request.POST['term']))
 		rdf_population = population(modify(request.POST['term']))
+		rdf_elevation = elevation(modify(request.POST['term']))
+		rdf_post = postalCode(modify(request.POST['term']))
+		rdf_area = areaCode(modify(request.POST['term']))
 
+		# For Artists
                 brth      = {}
 		dth       = {}
 		desc     = {}
@@ -31,8 +36,12 @@ def search(request):
 		bname = {}
 
 
-		loc = {}
-		pop = {}
+		# For places
+		loc   = {}
+		pop  = {}
+		elev = {}
+		post = {}
+		area = {}
 
 		# Birth Date
                 if len(rdf_birth) > 0:
@@ -59,10 +68,6 @@ def search(request):
                     bname.update({'bname': unicode(rdf_bname)})
                 print bname
 
-		# Child
-		#if len(rdf_thumb) > 0:
-                #    child.update({'child': unicode(rdf_child[0][1])})
-                #print child
 
 		# Location
 		if len(rdf_location) > 0:
@@ -74,6 +79,21 @@ def search(request):
                     pop.update({'pop': unicode(rdf_population)})
                 print pop
 
+		# Elevation
+		if len(rdf_elevation) > 0:
+                    elev.update({'elev': unicode(rdf_elevation)})
+                print elev
+
+		# Postal Code
+		if len(rdf_post) > 0:
+                    post.update({'post': unicode(rdf_post)})
+                print post
+
+		# Area Code
+		if len(rdf_area) > 0:
+                    area.update({'area': unicode(rdf_area)})
+                print area
+
 		return render(request,'search.html', {'result': result, 
 									      'birth_dict': brth, 
 									      'death_dict':dth,
@@ -82,6 +102,9 @@ def search(request):
 									      'bname_dict':bname,
 									      'loc_dict':loc,
 									      'pop_dict':pop,
+									      'elev_dict':elev,
+									      'post_dict':post,
+									      'area_dict':area,
 									      'term': request.POST['term']})
 	return render(request,'search.html')
 

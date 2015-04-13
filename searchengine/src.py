@@ -52,7 +52,7 @@ def birthName(term):
 	try:
 		bname = results.values()[1]['bindings'][0]['bname']['value']
 	except IndexError:
-		bname = "Not Found"
+		bname = ()
 
 	return bname
 
@@ -93,6 +93,60 @@ def population(term):
 		pop = ()
 
 	return pop
+
+def elevation(term):
+	sparql = SPARQLWrapper("http://dbpedia.org/sparql")
+	sparql.setQuery("""
+    		PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+    		SELECT ?ele WHERE {<http://dbpedia.org/resource/%s>
+                         <http://dbpedia.org/ontology/elevation> ?ele .
+   		 }
+	"""%(term))
+
+	sparql.setReturnFormat(JSON)
+	results = sparql.query().convert()
+	try:
+		ele = results.values()[1]['bindings'][0]['ele']['value']
+	except IndexError:
+		ele = ()
+
+	return ele
+
+def postalCode(term):
+	sparql = SPARQLWrapper("http://dbpedia.org/sparql")
+	sparql.setQuery("""
+    		PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+    		SELECT ?post WHERE {<http://dbpedia.org/resource/%s>
+                         <http://dbpedia.org/ontology/postalCode> ?post .
+   		 }
+	"""%(term))
+
+	sparql.setReturnFormat(JSON)
+	results = sparql.query().convert()
+	try:
+		post = results.values()[1]['bindings'][0]['post']['value']
+	except IndexError:
+		post = ()
+
+	return post
+
+def areaCode(term):
+	sparql = SPARQLWrapper("http://dbpedia.org/sparql")
+	sparql.setQuery("""
+    		PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+    		SELECT ?area WHERE {<http://dbpedia.org/resource/%s>
+                         <http://dbpedia.org/ontology/areaCode> ?area .
+   		 }
+	"""%(term))
+
+	sparql.setReturnFormat(JSON)
+	results = sparql.query().convert()
+	try:
+		area = results.values()[1]['bindings'][0]['area']['value']
+	except IndexError:
+		area = ()
+
+	return area
 
 	
 

@@ -102,7 +102,20 @@
 					<img src="{{ thumb_dict.thumb }}" alt="thumbnail"  height="250" width="250"><br><br>
 				{% endif %}
 
-				<bold>Population:</bold> {{ pop_dict.pop }}<br><br>
+				<bold>Population:</bold> {{ pop_dict.pop }}<br>
+
+				{% if elev_dict %}
+					<bold>Elevation:</bold> {{ elev_dict.elev }}<br>
+				{% endif %}
+
+				{% if post_dict %}
+					<bold>Postal Code:</bold> {{ post_dict.post }}<br>
+				{% endif %}
+
+				{% if area_dict %}
+					<bold>Area Code:</bold> {{ area_dict.area }}<br>
+				{% endif %}
+
 			{% endif %}
 
 
