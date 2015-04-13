@@ -1,5 +1,6 @@
 from google import search
 from rdflib import Graph, URIRef
+from SPARQLWrapper import SPARQLWrapper, JSON
 from django.http import Http404
 
 def goog(term,num):
@@ -36,6 +37,28 @@ def thumbnail(term):
 	for thumb in g.subject_objects(URIRef("http://dbpedia.org/ontology/thumbnail")):
 		th = thumb[1]
 	return th
+
+def birthName(term):
+	#t = "Elvis_Presley"
+	t = term
+	sparql = SPARQLWrapper("http://dbpedia.org/sparql")
+	sparql.setQuery("""
+    		PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+    		SELECT ?bname WHERE {<http://dbpedia.org/resource/%s>
+                         <http://dbpedia.org/ontology/birthName> ?bname .
+   		 }
+	"""%(t))
+
+	sparql.setReturnFormat(JSON)
+	results = sparql.query().convert()
+	try:
+		bname = results.values()[1]['bindings'][0]['bname']['value']
+	except IndexError:
+		bname = "Not Found"
+
+	return bname
+
+	
 
 
 

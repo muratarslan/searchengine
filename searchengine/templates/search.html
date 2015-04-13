@@ -68,23 +68,24 @@
 				<center><a href="{{birth_dict.link}}" target="_blank">{{term}}</a></center><br>
 
 				{% if thumb_dict %}
-					<img src="{{ thumb_dict.thumb }}" alt="thumbnail"  height="250" width="250"><br>
+					<img src="{{ thumb_dict.thumb }}" alt="thumbnail"  height="250" width="250"><br><br>
+				{% endif %}
+				
+				{% if bname_dict %}
+					Birth Name: {{ bname_dict.bname }}<br><br>
 				{% endif %}
 
 				{% if desc_dict %}
-					<bold>Description:</bold> {{ desc_dict.desc }}<br>
+					<bold>Description:</bold> {{ desc_dict.desc }}<br><br>
 				{% endif %}
 
-				Birth Date: {{ birth_dict.birth_date }}<br>
+				Birth Date: {{ birth_dict.birth_date }}<br><br>
 			{% endif %}
 
 			{% if death_dict %}
-				Death Date: {{ death_dict.death_date }}<br>
+				Death Date: {{ death_dict.death_date }}<br><br>
 			{% endif %}
 
-			{% if child_dict %}
-				<a href="{{ child_dict.child }}"> Children </a><br>
-			{% endif %}
 		</aside>
 
 	</div>
