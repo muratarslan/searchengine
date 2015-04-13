@@ -36,7 +36,7 @@
 
 	<header class="header">
 		{% load staticfiles %}
-		<img src="{% static "logo.png" %}" alt="LOGO"/>
+		<center><img src="{% static "logo.png" %}" alt="LOGO"/></center>
 	</header>
 
 	<div class="middle">
@@ -65,26 +65,46 @@
 			<br>
 			{% if birth_dict %}
 				<br>
-				<center><a href="{{birth_dict.link}}" target="_blank">{{term}}</a></center><br>
+				<center><a href="{{birth_dict.link}}" target="_blank">{{term}}</a></center><br><br>
 
 				{% if thumb_dict %}
 					<img src="{{ thumb_dict.thumb }}" alt="thumbnail"  height="250" width="250"><br><br>
 				{% endif %}
 				
 				{% if bname_dict %}
-					Birth Name: {{ bname_dict.bname }}<br><br>
+					Birth Name: {{ bname_dict.bname }}<br>
+				{% endif %}
+
+				{% if loc_dict %}
+					Location: {{ loc_dict.loc }}<br>
+				{% endif %}
+
+				Birth Date: {{ birth_dict.birth_date }}<br>
+
+				{% if death_dict %}
+					Death Date: {{ death_dict.death_date }}<br><br>
 				{% endif %}
 
 				{% if desc_dict %}
 					<bold>Description:</bold> {{ desc_dict.desc }}<br><br>
 				{% endif %}
-
-				Birth Date: {{ birth_dict.birth_date }}<br><br>
+	
 			{% endif %}
 
-			{% if death_dict %}
-				Death Date: {{ death_dict.death_date }}<br><br>
+			{% if pop_dict %}
+
+				{% if loc_dict %}
+				<br>
+				<center>{{loc_dict.loc}}</center><br><br>
+				{% endif %}
+
+				{% if thumb_dict %}
+					<img src="{{ thumb_dict.thumb }}" alt="thumbnail"  height="250" width="250"><br><br>
+				{% endif %}
+
+				<bold>Population:</bold> {{ pop_dict.pop }}<br><br>
 			{% endif %}
+
 
 		</aside>
 

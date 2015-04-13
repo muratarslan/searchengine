@@ -39,15 +39,13 @@ def thumbnail(term):
 	return th
 
 def birthName(term):
-	#t = "Elvis_Presley"
-	t = term
 	sparql = SPARQLWrapper("http://dbpedia.org/sparql")
 	sparql.setQuery("""
     		PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
     		SELECT ?bname WHERE {<http://dbpedia.org/resource/%s>
                          <http://dbpedia.org/ontology/birthName> ?bname .
    		 }
-	"""%(t))
+	"""%(term))
 
 	sparql.setReturnFormat(JSON)
 	results = sparql.query().convert()
@@ -58,8 +56,45 @@ def birthName(term):
 
 	return bname
 
-	
 
+
+def location(term):
+	sparql = SPARQLWrapper("http://dbpedia.org/sparql")
+	sparql.setQuery("""
+    		PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+    		SELECT ?loc WHERE {<http://dbpedia.org/resource/%s>
+                         <http://dbpedia.org/property/location> ?loc .
+   		 }
+	"""%(term))
+
+	sparql.setReturnFormat(JSON)
+	results = sparql.query().convert()
+	try:
+		loc = results.values()[1]['bindings'][0]['loc']['value']
+	except IndexError:
+		loc = ()
+
+	return loc
+
+def population(term):
+	sparql = SPARQLWrapper("http://dbpedia.org/sparql")
+	sparql.setQuery("""
+    		PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+    		SELECT ?pop WHERE {<http://dbpedia.org/resource/%s>
+                         <http://dbpedia.org/ontology/populationTotal> ?pop .
+   		 }
+	"""%(term))
+
+	sparql.setReturnFormat(JSON)
+	results = sparql.query().convert()
+	try:
+		pop = results.values()[1]['bindings'][0]['pop']['value']
+	except IndexError:
+		pop = ()
+
+	return pop
+
+	
 
 
 

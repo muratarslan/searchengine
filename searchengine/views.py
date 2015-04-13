@@ -14,17 +14,25 @@ def search(request):
 	if request.method == 'POST':
 		
 		result = goog(modify(request.POST['term']), 3)
+		# For Artists
 		rdf_birth   = list(birth(modify(request.POST['term'])))
 		rdf_death = list(death(modify(request.POST['term'])))
 		rdf_desc   = list(description(modify(request.POST['term'])))
 		rdf_thumb = thumbnail(modify(request.POST['term']))
 		rdf_bname = birthName(modify(request.POST['term']))
+		# For places
+		rdf_location = location(modify(request.POST['term']))
+		rdf_population = population(modify(request.POST['term']))
 
                 brth      = {}
 		dth       = {}
 		desc     = {}
 		thumb  = {}
 		bname = {}
+
+
+		loc = {}
+		pop = {}
 
 		# Birth Date
                 if len(rdf_birth) > 0:
@@ -55,8 +63,16 @@ def search(request):
 		#if len(rdf_thumb) > 0:
                 #    child.update({'child': unicode(rdf_child[0][1])})
                 #print child
-	
 
+		# Location
+		if len(rdf_location) > 0:
+                    loc.update({'loc': unicode(rdf_location)})
+                print loc
+
+		# Population
+		if len(rdf_population) > 0:
+                    pop.update({'pop': unicode(rdf_population)})
+                print pop
 
 		return render(request,'search.html', {'result': result, 
 									      'birth_dict': brth, 
@@ -64,6 +80,8 @@ def search(request):
 									      'desc_dict':desc,
 									      'thumb_dict':thumb,
 									      'bname_dict':bname,
+									      'loc_dict':loc,
+									      'pop_dict':pop,
 									      'term': request.POST['term']})
 	return render(request,'search.html')
 
